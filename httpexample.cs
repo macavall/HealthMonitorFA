@@ -31,13 +31,24 @@ namespace HealthMonitorFA56
             // Create 500 threads all awaiting for one minute
             //Thread.Sleep(60000);
 
-            for (int x = 0; x < 100; x++)
+            for (int i = 0; i < 100; i++)
             {
-                Task.Factory.StartNew(() =>
+                Thread newThread = new Thread(() =>
                 {
                     Thread.Sleep(60000);
                 });
+                newThread.IsBackground = true;
+                newThread.Start();
             }
+
+            //for (int x = 0; x < 100; x++)
+            //{
+
+            //    Task.Factory.StartNew(() =>
+            //    {
+            //        Thread.Sleep(60000);
+            //    });
+            //}
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
